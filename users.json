@@ -1,0 +1,38 @@
+[
+    {
+        "id": "9dd8e165-0dd4-4c55-a5bc-296828892fe3",
+        "username": "babaca",
+        "age": 12,
+        "hobbies": [
+            "post stamps",
+            "games"
+        ]
+    },
+    {
+        "id": "da3772c4-e2a1-424f-b7f4-9ba19b550130",
+        "username": "chubaka",
+        "age": 13,
+        "hobbies": [
+            "drug abuse",
+            "rock&roll"
+        ]
+    },
+    {
+        "id": "2534ad36-c011-41c4-adb8-124b9ec3c268",
+        "username": "sobaka",
+        "age": 14,
+        "hobbies": [
+            "books",
+            "classical music"
+        ]
+    },
+    {
+        "id": "6728e4bc-a0e0-4208-8b4f-a08b31a32be6",
+        "username": "brobaka",
+        "age": 15,
+        "hobbies": [
+            "movies",
+            "doing nothing"
+        ]
+    }
+]
