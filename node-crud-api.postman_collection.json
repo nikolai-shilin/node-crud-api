@@ -1,0 +1,197 @@
+{
+	"info": {
+		"_postman_id": "a750ee9a-1d45-4e4d-ae2a-b475fec226d8",
+		"name": "node-crud-api",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "1301626"
+	},
+	"item": [
+		{
+			"name": "Users",
+			"item": [
+				{
+					"name": "Get all users [success]",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{HOST}}:{{PORT}}{{USERS_API_PATH}}",
+							"host": [
+								"{{HOST}}"
+							],
+							"port": "{{PORT}}{{USERS_API_PATH}}"
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get user by a correct existent uuid [success]",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{HOST}}:{{PORT}}{{USERS_API_PATH}}/{{EXISTENT_USER_UUID}}",
+							"host": [
+								"{{HOST}}"
+							],
+							"port": "{{PORT}}{{USERS_API_PATH}}",
+							"path": [
+								"{{EXISTENT_USER_UUID}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get user by a correct non-existent uuid [failure]",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{HOST}}:{{PORT}}{{USERS_API_PATH}}/{{NON_EXISTENT_USER_UUID}}",
+							"host": [
+								"{{HOST}}"
+							],
+							"port": "{{PORT}}{{USERS_API_PATH}}",
+							"path": [
+								"{{NON_EXISTENT_USER_UUID}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get user by a correct broken uuid [failure]",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", () => {",
+									"  pm.response.to.have.status(400);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{HOST}}:{{PORT}}{{USERS_API_PATH}}/{{BROKEN_UUID}}",
+							"host": [
+								"{{HOST}}"
+							],
+							"port": "{{PORT}}{{USERS_API_PATH}}",
+							"path": [
+								"{{BROKEN_UUID}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create a new user [success]",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "    {\n        \"username\": \"dubaca2\",\n        \"age\": 12,\n        \"hobbies\": [\n            \"post stamps\",\n            \"games\"\n        ]\n    }",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{HOST}}:{{PORT}}{{USERS_API_PATH}}",
+							"host": [
+								"{{HOST}}"
+							],
+							"port": "{{PORT}}{{USERS_API_PATH}}"
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create a new user [failure]",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "    {\n        \"username\": \"dubaca\",\n        \"hobbies\": [\n            \"post stamps\",\n            \"games\"\n        ]\n    }",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{HOST}}:{{PORT}}{{USERS_API_PATH}}",
+							"host": [
+								"{{HOST}}"
+							],
+							"port": "{{PORT}}{{USERS_API_PATH}}"
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "HOST",
+			"value": "localhost",
+			"type": "string"
+		},
+		{
+			"key": "PORT",
+			"value": "3001",
+			"type": "string"
+		},
+		{
+			"key": "USERS_API_PATH",
+			"value": "/api/users",
+			"type": "string"
+		},
+		{
+			"key": "EXISTENT_USER_UUID",
+			"value": "9dd8e165-0dd4-4c55-a5bc-296828892fe3",
+			"type": "string"
+		},
+		{
+			"key": "NON_EXISTENT_USER_UUID",
+			"value": "b4c22e2f-a8ae-4db8-a03b-bf998bde9a46",
+			"type": "string"
+		},
+		{
+			"key": "BROKEN_UUID",
+			"value": "b4c22e2f-a8ae-4db8-a03b",
+			"type": "string"
+		}
+	]
+}
