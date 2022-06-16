@@ -8,8 +8,8 @@ import { updateUserByIdController } from "../controllers/Users/updateUserByIdCon
 
 const userRoter = express.Router();
 
-userRoter.post("", createUserController);
-userRoter.get("", getAllUsersController);
+userRoter.post("/", createUserController);
+userRoter.get("/", getAllUsersController);
 userRoter.get("/:userId", getUserByIdController);
 userRoter.put("/:userId", updateUserByIdController);
 userRoter.delete("/:userId", deleteUserByIdController);
