@@ -2,10 +2,11 @@ import { User } from "./User.js";
 import { readFileSync } from "fs";
 
 class UsersStore {
-    constructor(rawData) {
+    constructor(userListRawData) {
         this.store = new Map();
-        for (const userRawData of rawData) {
-            this.addUser(userRawData);
+        for (const userRawData of userListRawData) {
+            const user = new User(userRawData);
+            this.addUser(user);
         }
     }
 
@@ -19,12 +20,17 @@ class UsersStore {
         }
     }
 
-    validateUserExistance(key) {
+    #validateUserExistance(key) {
         if (this.store.has(key)) {
             return true;
         } else {
             throw Error('No such user');
         }
+    }
+
+    // CRUD INTERFACE
+    addUser(user) {
+        this.store.set(user.id, user);
     }
 
     getAll() {
@@ -35,25 +41,15 @@ class UsersStore {
         return this.store.get(key)
     }
 
-    addUser(user) {
-        this.store.set(user.id, user);
-    }
-
     updateUser(key, newUserData){
-        if (this.store.has(key)) {
-            const user = this.store.get(key);
-            this.store.set(key, user.update(newUserData));
-        } else {
-            throw Error('No such user');
-        }
+        this.#validateUserExistance(key);
+        const user = this.store.get(key);
+        this.store.set(key, user.update(newUserData));
     }
 
     deleteUser(key) {
-        if (this.store.has(key)) {
-            this.store.delete(key);
-        } else {
-            throw Error('No such user');
-        }
+        validateUserExistance(key);
+        this.store.delete(key);
     }
 }
 

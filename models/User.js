@@ -1,7 +1,13 @@
 import { v4 as uuidv4, validate as uuidValidate } from "uuid";
 
 class User {
-    static validateUserData(userData) {
+    constructor(userData) {
+        this.#validateRequiredUserData(userData)
+        this.#initializeId(userData.id);
+        this.update(userData);
+    }
+
+    #validateRequiredUserData(userData) {
         if ("username" in userData &&
             "age" in userData &&
             "hobbies" in userData) {
@@ -10,29 +16,25 @@ class User {
             throw Error('Invalid user data');
     }
 
-    static validateProhibitedUserData(userData) {
-        if (!("id" in userData)) {
-                return true;
-            };
-            throw Error('Invalid user data');
+    #addPropertySafe(propName, propValue) {
+        const prohibitedPropNames = new Set(['id']);
+        if (!(propName in prohibitedPropNames)) {
+            this[propName] = propValue;
+        }
     }
 
-    constructor(userData) {
-        User.validateUserData(userData)
-        if (userData.id && uuidValidate(userData.id)) {
-            this.id = userData.id;
+    #initializeId(predefinedId) {
+        if (predefinedId && uuidValidate(predefinedId)) {
+            this.id = predefinedId;
         } else  {
             this.id = uuidv4();
         }
-        this.username = userData.username;
-        this.age = userData.age;
-        this.hobbies = userData.hobbies;
     }
 
     update(newUserData) {
-        User.validateUserData(newUserData);
-        User.validateProhibitedUserData(newUserData);
-        Object.assign(this, newUserData);
+        for(const propName in newUserData) {
+            this.#addPropertySafe(propName, newUserData[propName]);
+        }
     }
 }
 
