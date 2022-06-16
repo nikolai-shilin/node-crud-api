@@ -11,6 +11,30 @@
 			"item": [
 				{
 					"name": "Get all users [success]",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"  pm.response.to.have.status(200);",
+									"});",
+									"",
+									"const json = pm.response.json();",
+									"",
+									"pm.test(\"Test data type of the user list\", () => {",
+									"  pm.expect(json).to.be.an(\"array\");",
+									"});",
+									"",
+									"pm.test(\"Test user list length\", () => {",
+									"  pm.expect(json.length).to.eql(4);",
+									"",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
 					"request": {
 						"method": "GET",
 						"header": [],
@@ -26,6 +50,36 @@
 				},
 				{
 					"name": "Get user by a correct existent uuid [success]",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"  pm.response.to.have.status(200);",
+									"});",
+									"",
+									"const json = pm.response.json();",
+									"",
+									"pm.test(\"Test data type of the response\", () => {",
+									"  pm.expect(json).to.be.an(\"object\");",
+									"  pm.expect(json.id).to.be.a(\"string\");",
+									"  pm.expect(json.username).to.be.a(\"string\");",
+									"  pm.expect(json.age).to.be.a(\"number\");",
+									"  pm.expect(json.hobbies).to.be.an(\"array\");",
+									"});",
+									"",
+									"pm.test(\"Test data type of the response\", () => {",
+									"  pm.expect(json.id).to.eql('6728e4bc-a0e0-4208-8b4f-a08b31a32be6');",
+									"  pm.expect(json.username).to.eql('brobaka');",
+									"  pm.expect(json.age).to.eql(15);",
+									"});",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
 					"request": {
 						"method": "GET",
 						"header": [],
@@ -44,6 +98,19 @@
 				},
 				{
 					"name": "Get user by a correct non-existent uuid [failure]",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", () => {",
+									"  pm.response.to.have.status(400);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
 					"request": {
 						"method": "GET",
 						"header": [],
@@ -93,6 +160,36 @@
 				},
 				{
 					"name": "Create a new user [success]",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"  pm.response.to.have.status(201);",
+									"});",
+									"",
+									"const json = pm.response.json();",
+									"",
+									"pm.test(\"Test data type of the response\", () => {",
+									"  pm.expect(json).to.be.an(\"object\");",
+									"  pm.expect(json.id).to.be.a(\"string\");",
+									"  pm.expect(json.username).to.be.a(\"string\");",
+									"  pm.expect(json.age).to.be.a(\"number\");",
+									"  pm.expect(json.hobbies).to.be.an(\"array\");",
+									"});",
+									"",
+									"pm.test(\"Test data type of the response\", () => {",
+									"//   pm.expect(json.id).to.eql('6728e4bc-a0e0-4208-8b4f-a08b31a32be6');",
+									"  pm.expect(json.username).to.eql('dubaca2');",
+									"  pm.expect(json.age).to.eql(12);",
+									"});",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
 					"request": {
 						"method": "POST",
 						"header": [],
@@ -116,7 +213,24 @@
 					"response": []
 				},
 				{
-					"name": "Create a new user [failure]",
+					"name": "Create a new user with not all required data [failure]",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", () => {",
+									"  pm.response.to.have.status(400);",
+									"});",
+									"",
+									"pm.test(\"Test body text value\", () => {",
+									"  pm.response.to.have.body('User model is invalid');",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
 					"request": {
 						"method": "POST",
 						"header": [],
@@ -138,8 +252,300 @@
 						}
 					},
 					"response": []
+				},
+				{
+					"name": "Update existent user [success]",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 204\", () => {",
+									"  pm.response.to.have.status(204);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "    {\n        \"username\": \"chubaka\",\n        \"age\": 113,\n        \"hobbies\": [\n            \"drug abuse\",\n            \"rock&roll\"\n        ]\n    }",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{HOST}}:{{PORT}}{{USERS_API_PATH}}/{{EXISTENT_USER_UUID}}",
+							"host": [
+								"{{HOST}}"
+							],
+							"port": "{{PORT}}{{USERS_API_PATH}}",
+							"path": [
+								"{{EXISTENT_USER_UUID}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update non-existent user [failure]",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 404\", () => {",
+									"  pm.response.to.have.status(404);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "    {\n        \"username\": \"chubaka\",\n        \"age\": 113,\n        \"hobbies\": [\n            \"drug abuse\",\n            \"rock&roll\"\n        ]\n    }",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{HOST}}:{{PORT}}{{USERS_API_PATH}}/{{NON_EXISTENT_USER_UUID}}",
+							"host": [
+								"{{HOST}}"
+							],
+							"port": "{{PORT}}{{USERS_API_PATH}}",
+							"path": [
+								"{{NON_EXISTENT_USER_UUID}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update user with broken uuid [failure]",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 400\", () => {",
+									"  pm.response.to.have.status(400);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "    {\n        \"username\": \"chubaka\",\n        \"age\": 113,\n        \"hobbies\": [\n            \"drug abuse\",\n            \"rock&roll\"\n        ]\n    }",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{HOST}}:{{PORT}}{{USERS_API_PATH}}/{{BROKEN_UUID}}",
+							"host": [
+								"{{HOST}}"
+							],
+							"port": "{{PORT}}{{USERS_API_PATH}}",
+							"path": [
+								"{{BROKEN_UUID}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete user [success]",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 204\", () => {",
+									"  pm.response.to.have.status(204);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{HOST}}:{{PORT}}{{USERS_API_PATH}}/{{EXISTENT_USER_UUID}}",
+							"host": [
+								"{{HOST}}"
+							],
+							"port": "{{PORT}}{{USERS_API_PATH}}",
+							"path": [
+								"{{EXISTENT_USER_UUID}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete non-existent user [failure]",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 404\", () => {",
+									"  pm.response.to.have.status(404);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{HOST}}:{{PORT}}{{USERS_API_PATH}}/{{NON_EXISTENT_USER_UUID}}",
+							"host": [
+								"{{HOST}}"
+							],
+							"port": "{{PORT}}{{USERS_API_PATH}}",
+							"path": [
+								"{{NON_EXISTENT_USER_UUID}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete user with broken uuid [failure]",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 400\", () => {",
+									"  pm.response.to.have.status(400);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "    {\n        \"username\": \"chubaka\",\n        \"age\": 113,\n        \"hobbies\": [\n            \"drug abuse\",\n            \"rock&roll\"\n        ]\n    }",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{HOST}}:{{PORT}}{{USERS_API_PATH}}/{{BROKEN_UUID}}",
+							"host": [
+								"{{HOST}}"
+							],
+							"port": "{{PORT}}{{USERS_API_PATH}}",
+							"path": [
+								"{{BROKEN_UUID}}"
+							]
+						}
+					},
+					"response": []
 				}
 			]
+		},
+		{
+			"name": "Unsupported URL [success]",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 404\", () => {",
+							"  pm.response.to.have.status(404);",
+							"});",
+							"",
+							"pm.test(\"Test body text value\", () => {",
+							"  pm.response.to.have.body('Sorry can\\'t find that!');",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{HOST}}:{{PORT}}/randomUrl",
+					"host": [
+						"{{HOST}}"
+					],
+					"port": "{{PORT}}",
+					"path": [
+						"randomUrl"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Unsupported request type [failure]",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 404\", () => {",
+							"  pm.response.to.have.status(404);",
+							"});",
+							"",
+							"pm.test(\"Test body text value\", () => {",
+							"  pm.response.to.have.body('Sorry can\\'t find that!');",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "PURGE",
+				"header": [],
+				"url": {
+					"raw": "{{HOST}}:{{PORT}}/{{USERS_API_PATH}}",
+					"host": [
+						"{{HOST}}"
+					],
+					"port": "{{PORT}}",
+					"path": [
+						"{{USERS_API_PATH}}"
+					]
+				}
+			},
+			"response": []
 		}
 	],
 	"event": [
