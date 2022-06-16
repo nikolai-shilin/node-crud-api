@@ -128,7 +128,7 @@
 					"response": []
 				},
 				{
-					"name": "Get user by a correct broken uuid [failure]",
+					"name": "Get user by a broken uuid [failure]",
 					"event": [
 						{
 							"listen": "test",
@@ -180,7 +180,6 @@
 									"});",
 									"",
 									"pm.test(\"Test data type of the response\", () => {",
-									"//   pm.expect(json.id).to.eql('6728e4bc-a0e0-4208-8b4f-a08b31a32be6');",
 									"  pm.expect(json.username).to.eql('dubaca2');",
 									"  pm.expect(json.age).to.eql(12);",
 									"});",
