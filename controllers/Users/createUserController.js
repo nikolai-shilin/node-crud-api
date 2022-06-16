@@ -1,5 +1,5 @@
-import { UsersStore } from "../models/UsersStore.js";
-import { User } from "../models/User.js";
+import { UsersStore } from "../../models/UsersStore.js";
+import { User } from "../../models/User.js";
 
 const createUserController = async (req, res) => {
   const users = UsersStore.getInstance();

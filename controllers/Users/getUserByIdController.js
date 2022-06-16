@@ -1,4 +1,4 @@
-import { UsersStore } from "../models/UsersStore.js";
+import { UsersStore } from "../../models/UsersStore.js";
 import { validate as uuidValidate } from "uuid";
 
 const getUserByIdController = async (req, res) => {
