@@ -104,7 +104,7 @@
 							"script": {
 								"exec": [
 									"pm.test(\"Status code is 200\", () => {",
-									"  pm.response.to.have.status(400);",
+									"  pm.response.to.have.status(404);",
 									"});"
 								],
 								"type": "text/javascript"
