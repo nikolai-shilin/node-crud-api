@@ -44,11 +44,12 @@ class UsersStore {
     updateUser(key, newUserData){
         this.#validateUserExistance(key);
         const user = this.store.get(key);
-        this.store.set(key, user.update(newUserData));
+        user.update(newUserData);
+        this.store.set(key, user);
     }
 
     deleteUser(key) {
-        validateUserExistance(key);
+        this.#validateUserExistance(key);
         this.store.delete(key);
     }
 }
