@@ -6,7 +6,7 @@ import { internalServerErrorController } from "./middleware/500.js";
 
 const app = new express();
 app.use(express.json());
-app.use(userRoter);
+app.use('/api/users', userRoter);
 
 // error handling - has to be last
 app.use(internalServerErrorController);

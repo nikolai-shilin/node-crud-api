@@ -8,10 +8,10 @@ import { updateUserByIdController } from "../controllers/Users/updateUserByIdCon
 
 const userRoter = express.Router();
 
-userRoter.post("/api/users", createUserController);
-userRoter.get("/api/users", getAllUsersController);
-userRoter.get("/api/users/:userId", getUserByIdController);
-userRoter.put("/api/users/:userId", updateUserByIdController);
-userRoter.delete("/api/users/:userId", deleteUserByIdController);
+userRoter.post("", createUserController);
+userRoter.get("", getAllUsersController);
+userRoter.get("/:userId", getUserByIdController);
+userRoter.put("/:userId", updateUserByIdController);
+userRoter.delete("/:userId", deleteUserByIdController);
 
 export { userRoter };
