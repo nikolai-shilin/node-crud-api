@@ -1,5 +1,4 @@
 import express from "express";
-import "dotenv/config";
 import { userRoter } from './routers/users.js';
 import { notFoundController } from "./middleware/404.js";
 import { internalServerErrorController } from "./middleware/500.js";
@@ -12,7 +11,4 @@ app.use('/api/users', userRoter);
 app.use(internalServerErrorController);
 app.use(notFoundController);
 
-const PORT = process.env.PORT || 3000;
-app.listen(PORT, () => {
-  console.log(`Server listening on port:${PORT}`);
-});
+export { app };
