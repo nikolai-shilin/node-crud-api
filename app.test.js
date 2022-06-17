@@ -72,7 +72,7 @@ describe("createUser", () => {
       expect(response.body).toEqual(expect.objectContaining(mockUserData));
     });
 
-    it("should respond with set id", async () => {
+    it("should respond an object with a defined id", async () => {
       const response = await request(app).post(`/api/users`).send(mockUserData);
       expect(response.body.id.length).toEqual(36);
       expect(typeof response.body.id).toEqual("string");
