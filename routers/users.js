@@ -1,10 +1,12 @@
 import express from "express";
 
-import { getAllUsersController } from "../controllers/users/getAllUsersController.js";
-import { getUserByIdController } from "../controllers/users/getUserByIdController.js";
-import { createUserController } from "../controllers/users/createUserController.js";
-import { deleteUserByIdController } from "../controllers/users/deleteUserByIdController.js";
-import { updateUserByIdController } from "../controllers/users/updateUserByIdController.js";
+import {
+  getAllUsersController,
+  getUserByIdController,
+  createUserController,
+  deleteUserByIdController,
+  updateUserByIdController,
+} from "../controllers/users/index.js";
 
 const userRoter = express.Router();
 
