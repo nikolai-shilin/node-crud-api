@@ -1,8 +1,8 @@
 # node-crud-api
 
-## Installation / Prerequizites
+## Installation / Prerequisites
 
-Node v16.15.1 is defined in [.nvmrc](https://github.com/nikolai-shilin/node-crud-api/blob/main/.envrc) file
+Node v16.15.1 is defined in [.nvmrc](/.envrc) file:
     - `npm install` to install dependencies
     - [nvm](https://github.com/nvm-sh/nvm) helps to define node.js version automatically
 
@@ -14,20 +14,20 @@ Node v16.15.1 is defined in [.nvmrc](https://github.com/nikolai-shilin/node-crud
 
 ## Tests
 
-2 types of tests are used: Jest and Postman 
+2 types of tests are used: Jest and Postman:
     - `npm run test` to start jest tests
-    - [node-crud-api.postman_collection.json](https://github.com/nikolai-shilin/node-crud-api/blob/main/node-crud-api.postman_collection.json) is postman tests file
+    - [node-crud-api.postman_collection.json](/postman_collection.json) is postman tests file
 
 ## API
 
-1. Endpoint `api/users`:
+Endpoint `api/users`:
     - **GET** `api/users` is used to get all persons
     - **GET** `api/users/${userId}`  is used to get a person by id
     - **POST** `api/users` is used to create record about new user and store it in database
     - **PUT** `api/users/{userId}` is used to update existing user
     - **DELETE** `api/users/${userId}` is used to delete existing user from database
 
-2. Users are stored as `objects` that have following properties:
+Users are stored as `objects` that have following properties:
     - `id` — unique identifier (`string`, `uuid`)
     - `username` — user's name (`string`, **required**)
     - `age` — user's age (`number`, **required**)
