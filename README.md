@@ -1,16 +1,25 @@
 # node-crud-api
+
 ## Installation / Prerequizites
+
 Node v16.15.1 is defined in [.nvmrc](https://github.com/nikolai-shilin/node-crud-api/blob/main/.envrc) file
     - `npm install` to install dependencies
     - [nvm](https://github.com/nvm-sh/nvm) helps to define node.js version automatically
+
 ## Run
+
 2 modes of running application (**development** and **production**):
     - `npm run start:dev` The application is run in development mode using `nodemon`
     - `npm run start:prod` The application is run in production mode (there is a  that starts the build process and then runs)
+
 ## Tests
-- `npm run test` to start jest tests
-- [node-crud-api.postman_collection.json](https://github.com/nikolai-shilin/node-crud-api/blob/main/node-crud-api.postman_collection.json) is postman tests file
+
+2 types of tests are used: Jest and Postman 
+    - `npm run test` to start jest tests
+    - [node-crud-api.postman_collection.json](https://github.com/nikolai-shilin/node-crud-api/blob/main/node-crud-api.postman_collection.json) is postman tests file
+
 ## API
+
 1. Endpoint `api/users`:
     - **GET** `api/users` is used to get all persons
     - **GET** `api/users/${userId}`  is used to get a person by id
