@@ -7,7 +7,7 @@
   "scripts": {
     "test": "node --experimental-vm-modules node_modules/jest/bin/jest.js",
     "start:dev": "nodemon main.js --ignore tests/",
-    "start:prod": "node main.js"
+    "start:prod": "npm install && node main.js"
   },
   "repository": {
     "type": "git",
