@@ -3,8 +3,8 @@ import { app } from "./app.js";
 
 const start = (port) => {
   try {
-    app.listen(PORT, () => {
-      console.log(`Server listening on port:${PORT}`);
+    app.listen(port, () => {
+      console.log(`Server listening on port:${port}`);
     });
   } catch (err) {
     console.error(err);
