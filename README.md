@@ -1,7 +1,8 @@
 # node-crud-api
-## Installation
-    - `npm i` to install dependencies
-    - node v16.15.1 is defined in .nvmrc file
+## Installation / Prerequizites
+Node v16.15.1 is defined in [.nvmrc](https://github.com/nikolai-shilin/node-crud-api/blob/main/.envrc) file
+    - `npm install` to install dependencies
+    - [nvm](https://github.com/nvm-sh/nvm) helps to define node.js version automatically
 ## Run
 2 modes of running application (**development** and **production**):
     - `npm run start:dev` The application is run in development mode using `nodemon`
