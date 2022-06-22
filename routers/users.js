@@ -1,19 +1,13 @@
 import express from "express";
-
-import {
-  getAllUsersController,
-  getUserByIdController,
-  createUserController,
-  deleteUserByIdController,
-  updateUserByIdController,
-} from "../controllers/users/index.js";
+import users from "../controllers/users/index.js";
 
 const userRoter = express.Router();
 
-userRoter.post("/", createUserController);
-userRoter.get("/", getAllUsersController);
-userRoter.get("/:userId", getUserByIdController);
-userRoter.put("/:userId", updateUserByIdController);
-userRoter.delete("/:userId", deleteUserByIdController);
+userRoter
+  .post("/", users.createUserController)
+  .get("/", users.getAllUsersController)
+  .get("/:userId", users.getUserByIdController)
+  .put("/:userId", users.updateUserByIdController)
+  .delete("/:userId", users.deleteUserByIdController);
 
 export { userRoter };

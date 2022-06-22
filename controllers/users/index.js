@@ -5,7 +5,7 @@ import { deleteUserByIdController } from "./deleteUserByIdController.js";
 import { updateUserByIdController } from "./updateUserByIdController.js";
 
 
-export {
+export default {
     getAllUsersController,
     getUserByIdController,
     createUserController,
